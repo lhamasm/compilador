@@ -23,9 +23,12 @@ def estado_inicial(index, line):
 		elif line[index] == '.' or line[index] == ':' or line[index] == ';' or line[index] == '+' or line[index] == '-' or line[index] == '/' or line[index] == '%' or line[index] == '(' or line[index] == ')' or line[index] == '[' or line[index] == ']' or line[index] == '=' or line[index] == '&' or line[index] == '|' or line[index] == '!':
 			estado_oito(index, line)
 		elif line[index] == ' ' or line[index] == '\n' or line[index] == '\t':
-			estado_inicial(index, line)
+			estado_inicial(index+1, line)
 		else:
-			print(ln, index + 1)
+			if index == 0:
+				index += 1
+
+			print(ln, index)
 			erro = True
 			estado_inicial(index + 1, line)
 
@@ -168,7 +171,7 @@ def estado_oito(index, line):
 def estado_nove(index, number, line):
 	global erro
 
-	count = len(number)
+	count = 0
 
 	while count < 513:
 		if line[index + count] >= '0' and line[index + count] <= '9':
@@ -187,7 +190,7 @@ def estado_nove(index, number, line):
 		estado_inicial(index + count, line)
 	else:
 		tokens.append(('NUMBER', number))
-		estado_inicial(index + count + 1, line)
+		estado_inicial(index + count, line)
 
 if __name__ == '__main__':
 	file = open('codigo.txt', 'r')
