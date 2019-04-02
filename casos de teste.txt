@@ -1,0 +1,97 @@
+**
+*
+** 7
+* 123
+** abacaxi
+* xixi
+<>
+<=
+<-!
+<>
+>==
+==
+!=
+<>lol
+&& || == !!
+abracadabra zica de maluco
+olha	o 	tab
+kkk7
+4got
+"uma string so pra contrariar"
+"mais uma string só pra contrariar"
+$#7
+ola | oi
+ola|oi
+amor & paz
+paz&amor
+0,0,5
+55555,
+00000
+1,000
+0,,0
+,10
+a,a
+(hoje eh festa)
+"a galinha magricela e
+bota um e 
+bota dois e
+bota três"
+INTEIRO : a; b;c    ;d .
+VET REAL:v 100.
+BIT:please.
+Pi <- 3.14159			;
+Pi < - 3.14159			;
+bit[233]=0;
+a
+-a[0]
+(a)-b[c+d]
+a+245/b
+-(1)
+a+b*c
+a**(-b%c)
+a/10**b
+a ** b
+10 / 100
+10	%	7
+10 = 10
+a = b
+70 <> 90
+abacaxi <> melao
+abacaxi | melao & melancia
+( cafe | suco ) & ! jantar
+SE a
+INICIO
+	a = b
+FIM
+SENAO
+INICIO
+	a <> b
+	-[a]
+FIM
+SE a
+INICIO
+	a = b
+FIM
+SENAO
+INICIO
+	a <> b
+	-[a][]
+FINAL
+
+LEIA a.
+LEIA a; b; c.
+ESCREVA a+b.
+ESCREVA "abc";a    ;    123,5; abc;
+
+
+FUNCAO sqrt(REAL:n):REAL.
+F U N C A O s q r t ( R E A  L: n) : R E A L
+FUNCAO ordena(VET INTEIRO: v; INTEIRO:n): NULO;
+RECEBA.
+RECEBA (COCOCOC)
+RECEBA (a == b)
+" aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+
+77777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777,000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
