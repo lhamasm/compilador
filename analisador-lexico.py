@@ -193,10 +193,18 @@ def estado_nove(index, number, line):
 		estado_inicial(index + count, line)
 
 if __name__ == '__main__':
-	file = open('codigo.txt', 'r')
-	lines = file.readlines()
+	# file = open('codigo.txt', 'r')
+	#lines = file.readlines()
 
 	ok = True
+	lines = []
+
+	while True:
+		try:
+			text = input()
+			lines.append(text)
+		except EOFError:
+			break
 	
 	for line in lines:
 		for index in range(0, len(line)):
