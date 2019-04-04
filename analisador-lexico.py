@@ -1,6 +1,7 @@
 ln = 1
 erro = False
 ehString = False
+lines = []
 
 palavras_reservadas = ['ATEH', 'BIT', 'DE', 'ENQUANTO', 'ESCREVA', 'FIM', 'FUNCAO', 'INICIO', 'INTEIRO', 'LEIA', 'NULO', 'PARA', 'PARE', 'REAL', 'RECEBA', 'SE', 'SENAO', 'VAR', 'VET']
 tokens = []
@@ -29,6 +30,9 @@ def estado_inicial(index, line):
 			elif line[index] == '.' or line[index] == ':' or line[index] == ';' or line[index] == '+' or line[index] == '-' or line[index] == '/' or line[index] == '%' or line[index] == '(' or line[index] == ')' or line[index] == '[' or line[index] == ']' or line[index] == '=' or line[index] == '&' or line[index] == '|' or line[index] == '!':
 				estado_oito(index, line)
 			elif line[index] == ' ' or line[index] == '\n' or line[index] == '\t':
+				if line[index] == '\n':
+					ln += 1
+
 				estado_inicial(index+1, line)
 			else:
 				if index == 0:
@@ -51,6 +55,7 @@ def estado_tres(index, line):
 	global erro
 	global ehString
 	global ln
+	global lines
 
 	if index < len(line):
 		count = 0
@@ -65,7 +70,7 @@ def estado_tres(index, line):
 				tokens.append(('STRING', string + '"'))
 				estado_inicial(index + count + 1, line)
 			else:
-				print ln, index + count
+				print ln, index + count - 1
 				erro = True
 				estado_inicial(index + count, line)
 		elif index + count >= len(line):
@@ -78,8 +83,12 @@ def estado_tres(index, line):
 			ehString = False
 			estado_inicial(index + count + 1, line)
 	else:
-		erro = True
-		print ln, index
+		if ln == len(lines):
+			erro = True
+			print ln, index - 1
+		else:
+			ehString = True
+			return
 
 def estado_quatro(index, line):
 	global erro
@@ -108,11 +117,23 @@ def estado_quatro(index, line):
 		elif index + count >= len(line):
 			tokens.append(('NUMBER', number))
 		elif line[index + count] == ',':
-			if line[index + count + 1] >= '0' and line[index + count + 1] <= '9':
-				estado_nove(index + count + 1, number + ',', line)
+			if index + count + 1 < len(line):
+				if line[index + count + 1] >= '0' and line[index + count + 1] <= '9':
+					estado_nove(index + count + 1, number + ',', line)
+				else:
+					if line[index + count + 1] == ',':
+						print ln, index + count + 1
+						print ln, index + count + 2
+						erro = True
+						tokens.append(('NUMBER', number + ','))
+						estado_inicial(index + count + 2, line)
+					else:
+						tokens.append(('NUMBER', number + ','))
+						estado_inicial(index + count + 1, line)
 			else:
-				('NUMBER', number + ',')
-				estado_inicial(index + count + 1, line)	
+				tokens.append(('NUMBER', number + ','))
+				return
+
 		elif (line[index + count] >= 'a' and line[index + count] <= 'z') or (line[index + count] >= 'A' and line[index + count] <= 'Z'):
 			print ln, index+count
 			erro = True
@@ -181,38 +202,43 @@ def estado_sete(index, line):
 			estado_inicial(index, line)
 
 def estado_oito(index, line):
-	tokens.append((line[index], line[index]))
-	estado_inicial(index + 1, line)
+	if index < len(line):
+		tokens.append((line[index], line[index]))
+		estado_inicial(index + 1, line)
 
 def estado_nove(index, number, line):
-	global erro
-	global ln
+	if index < len(line):
+		global erro
+		global ln
 
-	count = 0
+		count = 0
 
-	while count < 513:
-		if line[index + count] >= '0' and line[index + count] <= '9':
-			number += line[index + count]
-			count += 1
-		else:
-			break
+		while index + count < len(line) and count + index < 513:
+			if line[index + count] >= '0' and line[index + count] <= '9':
+				number += line[index + count]
+				count += 1
+			else:
+				break
 
-	if count == 513:
-		if line[index + count] >= '0' and line[index + count] <= '9':
-			print ln, index+count
-			erro = True
-		else:
-			tokens.append(('NUMBER', number))
-	
-		estado_inicial(index + count, line)
-	else:
-		if line[index + count] == ',':
-			print ln, index + count
-			print ln, index + count + 1
-			estado_inicial(index + count + 1, line)
-		else:
-			tokens.append(('NUMBER', number))
+		if index + count == 513:
+			if line[index + count] >= '0' and line[index + count] <= '9':
+				print ln, index + count - 1
+				erro = True
+			else:
+				tokens.append(('NUMBER', number))
+		
 			estado_inicial(index + count, line)
+		elif index + count >= len(line):
+				tokens.append(('NUMBER', number))
+		else:
+			if line[index + count] == ',':
+				print ln, index + count
+				print ln, index + count + 1
+				erro = True
+				estado_inicial(index + count + 1, line)
+			else:
+				tokens.append(('NUMBER', number))
+				estado_inicial(index + count, line)
 		
 
 if __name__ == '__main__':
@@ -220,7 +246,6 @@ if __name__ == '__main__':
 	#lines = file.readlines()
 
 	ok = True
-	lines = []
 
 	while True:
 		try:
@@ -243,7 +268,7 @@ if __name__ == '__main__':
 			ln += 1
 
 		if not erro:
-			print 'OK'
+			print 'OK\n'
 			tokens.append(('eof', 'eof'))
 
 				
