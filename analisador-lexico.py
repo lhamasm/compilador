@@ -1,36 +1,42 @@
 ln = 1
 erro = False
+ehString = False
 
 palavras_reservadas = ['ATEH', 'BIT', 'DE', 'ENQUANTO', 'ESCREVA', 'FIM', 'FUNCAO', 'INICIO', 'INTEIRO', 'LEIA', 'NULO', 'PARA', 'PARE', 'REAL', 'RECEBA', 'SE', 'SENAO', 'VAR', 'VET']
 tokens = []
 
 def estado_inicial(index, line):
 	global erro
+	global ehString
+	global ln
 
 	if index < len(line):
-		if line[index] == '*':
-			estado_dois(index + 1, line)
-		elif line[index] == '"':
-			estado_tres(index + 1, line)
-		elif line[index] >= '0' and line[index] <= '9':
-			estado_quatro(index, line)
-		elif (line[index] >= 'a' and line[index] <= 'z') or (line[index] >= 'A' and line[index] <= 'Z'):
-			estado_cinco(index, line)
-		elif line[index] == '>':
-			estado_seis(index + 1, line)
-		elif line[index] == '<':
-			estado_sete(index + 1, line)
-		elif line[index] == '.' or line[index] == ':' or line[index] == ';' or line[index] == '+' or line[index] == '-' or line[index] == '/' or line[index] == '%' or line[index] == '(' or line[index] == ')' or line[index] == '[' or line[index] == ']' or line[index] == '=' or line[index] == '&' or line[index] == '|' or line[index] == '!':
-			estado_oito(index, line)
-		elif line[index] == ' ' or line[index] == '\n' or line[index] == '\t':
-			estado_inicial(index+1, line)
+		if ehString:
+			estado_tres(index, line)
 		else:
-			if index == 0:
-				index += 1
+			if line[index] == '*':
+				estado_dois(index + 1, line)
+			elif line[index] == '"':
+				estado_tres(index + 1, line)
+			elif line[index] >= '0' and line[index] <= '9':
+				estado_quatro(index, line)
+			elif (line[index] >= 'a' and line[index] <= 'z') or (line[index] >= 'A' and line[index] <= 'Z'):
+				estado_cinco(index, line)
+			elif line[index] == '>':
+				estado_seis(index + 1, line)
+			elif line[index] == '<':
+				estado_sete(index + 1, line)
+			elif line[index] == '.' or line[index] == ':' or line[index] == ';' or line[index] == '+' or line[index] == '-' or line[index] == '/' or line[index] == '%' or line[index] == '(' or line[index] == ')' or line[index] == '[' or line[index] == ']' or line[index] == '=' or line[index] == '&' or line[index] == '|' or line[index] == '!':
+				estado_oito(index, line)
+			elif line[index] == ' ' or line[index] == '\n' or line[index] == '\t':
+				estado_inicial(index+1, line)
+			else:
+				if index == 0:
+					index += 1
 
-			print(ln, index)
-			erro = True
-			estado_inicial(index + 1, line)
+				print ln, index
+				erro = True
+				estado_inicial(index + 1, line)
 
 def estado_dois(index, line):
 	if index < len(line):
@@ -43,6 +49,8 @@ def estado_dois(index, line):
 
 def estado_tres(index, line):
 	global erro
+	global ehString
+	global ln
 
 	if index < len(line):
 		count = 0
@@ -57,18 +65,25 @@ def estado_tres(index, line):
 				tokens.append(('STRING', string + '"'))
 				estado_inicial(index + count + 1, line)
 			else:
-				print(ln, index + count)
+				print ln, index + count
 				erro = True
 				estado_inicial(index + count, line)
 		elif index + count >= len(line):
-			print(ln, index + count - 1)
-			erro = True
+			#print ln, index + count - 1
+			#erro = True
+			ehString = True
+			return
 		else:
 			tokens.append(('STRING', string + '"'))
+			ehString = False
 			estado_inicial(index + count + 1, line)
+	else:
+		erro = True
+		print ln, index
 
 def estado_quatro(index, line):
 	global erro
+	global ln
 
 	if index < len(line):
 		count = 0
@@ -83,7 +98,7 @@ def estado_quatro(index, line):
 
 		if count == 513:
 			if line[index + count] >= '0' and line[index + count] <= '9':
-				print(ln, index + count - 1)
+				print ln, index + count - 1
 				erro = True
 			else:
 				tokens.append(('NUMBER', number))
@@ -99,7 +114,7 @@ def estado_quatro(index, line):
 				('NUMBER', number + ',')
 				estado_inicial(index + count + 1, line)	
 		elif (line[index + count] >= 'a' and line[index + count] <= 'z') or (line[index + count] >= 'A' and line[index + count] <= 'Z'):
-			print(ln, index+count)
+			print ln, index+count
 			erro = True
 			estado_inicial(index + count + 1, line)
 		elif line[index + count] == '\t' or line[index + count] == '\n':
@@ -110,6 +125,7 @@ def estado_quatro(index, line):
 
 def estado_cinco(index, line):
 	global erro
+	global ln
 
 	if index < len(line):
 		count = 0
@@ -129,7 +145,7 @@ def estado_cinco(index, line):
 
 		if count == 513:
 			if (line[index + count] >= 'a' and line[index + count] <= 'z') or (line[index + count] >= 'A' and line[index + count] <= 'Z') or (line[index + count] >= '0' and line[index + count] <= '9'):
-				print(ln, index + count - 1)
+				print ln, index + count - 1
 				erro = True
 			
 			estado_inicial(index + count, line)
@@ -170,6 +186,7 @@ def estado_oito(index, line):
 
 def estado_nove(index, number, line):
 	global erro
+	global ln
 
 	count = 0
 
@@ -182,15 +199,21 @@ def estado_nove(index, number, line):
 
 	if count == 513:
 		if line[index + count] >= '0' and line[index + count] <= '9':
-			print(ln, index+count)
+			print ln, index+count
 			erro = True
 		else:
 			tokens.append(('NUMBER', number))
 	
 		estado_inicial(index + count, line)
 	else:
-		tokens.append(('NUMBER', number))
-		estado_inicial(index + count, line)
+		if line[index + count] == ',':
+			print ln, index + count
+			print ln, index + count + 1
+			estado_inicial(index + count + 1, line)
+		else:
+			tokens.append(('NUMBER', number))
+			estado_inicial(index + count, line)
+		
 
 if __name__ == '__main__':
 	# file = open('codigo.txt', 'r')
@@ -201,15 +224,14 @@ if __name__ == '__main__':
 
 	while True:
 		try:
-			text = input()
-			lines.append(text)
+			lines.append(raw_input())
 		except EOFError:
 			break
 	
 	for line in lines:
 		for index in range(0, len(line)):
 			if (ord(line[index]) < 9 or ord(line[index]) > 10) and (ord(line[index]) < 32 or ord(line[index]) > 126):
-				print('ARQUIVO INVALIDO')
+				print 'ARQUIVO INVALIDO'
 				ok = False
 				break
 		if not ok:
@@ -221,7 +243,7 @@ if __name__ == '__main__':
 			ln += 1
 
 		if not erro:
-			print('OK')
+			print 'OK'
 			tokens.append(('eof', 'eof'))
 
 				
